@@ -12,6 +12,7 @@ services:
       - db
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
+      ENABLE_AUTOMATIC_MIGRATION: "true"
   
   db:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
