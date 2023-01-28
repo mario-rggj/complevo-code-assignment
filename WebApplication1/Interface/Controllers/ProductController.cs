@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.Application.UseCases;
 using WebApplication1.Domain;
-using WebApplication1.Infrastructure.Context;
+
+// TODO: create Patch Method
+// TODO: create class for Product not found exception
 
 namespace WebApplication1.Interface.Controllers
 {
@@ -9,40 +11,40 @@ namespace WebApplication1.Interface.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ApiContext _context;
+        private readonly GetProductsUseCase _getProductsUseCase;
+        private readonly GetProductUseCase _getProductUseCase;
+        private readonly PutProductUseCase _putProductUseCase;
+        private readonly PostProductUseCase _postProductUseCase;
+        private readonly DeleteProductUseCase _deleteProductUseCase;
 
-        public ProductController(ApiContext context)
+        public ProductController(
+            GetProductsUseCase getProductsUseCase,
+            GetProductUseCase getProductUseCase,
+            PutProductUseCase putProductUseCase,
+            PostProductUseCase postProductUseCase,
+            DeleteProductUseCase deleteProductUseCase)
         {
-            _context = context;
+            _getProductsUseCase = getProductsUseCase;
+            _getProductUseCase = getProductUseCase;
+            _putProductUseCase = putProductUseCase;
+            _postProductUseCase = postProductUseCase;
+            _deleteProductUseCase = deleteProductUseCase;
         }
 
         // GET: api/Product
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-          if (_context.Products == null)
-          {
-              return NotFound();
-          }
-            return await _context.Products.ToListAsync();
+            return await _getProductsUseCase.Handle();
         }
 
         // GET: api/Product/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-          if (_context.Products == null)
-          {
-              return NotFound();
-          }
-            var product = await _context.Products.FindAsync(id);
+            var product = await _getProductUseCase.Handle(id);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return product;
+            return product == null ? NotFound() : product;
         }
 
         // PUT: api/Product/5
@@ -55,22 +57,18 @@ namespace WebApplication1.Interface.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _putProductUseCase.Handle(id, product);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!ProductExists(id))
+                if (e.Message.Equals("Product not found"))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                throw;
             }
 
             return NoContent();
@@ -81,12 +79,7 @@ namespace WebApplication1.Interface.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-          if (_context.Products == null)
-          {
-              return Problem("Entity set 'ApiContext.Products'  is null.");
-          }
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            await _postProductUseCase.Handle(product);
 
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
@@ -95,25 +88,18 @@ namespace WebApplication1.Interface.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            if (_context.Products == null)
+            try
             {
-                return NotFound();
+                await _deleteProductUseCase.Handle(id);
             }
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            catch (Exception e)
             {
-                return NotFound();
+                if (e.Message.Equals("Product not found"))
+                    return NotFound();
+                throw;
             }
-
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool ProductExists(int id)
-        {
-            return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

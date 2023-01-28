@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Application.UseCases;
 using WebApplication1.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,11 @@ var connectionString = Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER"
 // Add services to the container.
 builder.Services.AddDbContext<ApiContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString)));
+builder.Services.AddScoped<GetProductsUseCase>();
+builder.Services.AddScoped<GetProductUseCase>();
+builder.Services.AddScoped<PutProductUseCase>();
+builder.Services.AddScoped<PostProductUseCase>();
+builder.Services.AddScoped<DeleteProductUseCase>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
