@@ -2,9 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Domain.Models;
 using WebApplication1.Domain.UseCases;
 
-// TODO: create Patch Method
-// TODO: create class for Product not found exception
-
 namespace WebApplication1.Interface.Controllers;
 
 [Route("api/[controller]")]
