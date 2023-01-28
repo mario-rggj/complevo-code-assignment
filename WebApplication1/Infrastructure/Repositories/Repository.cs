@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using WebApplication1.Domain.Infrastructure.Repositories;
 using WebApplication1.Infrastructure.Context;
 
@@ -15,7 +15,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         Context = context;
     }
-    
+
     public async Task<ActionResult<IEnumerable<TEntity>>> GetAll()
     {
         return await Context.Set<TEntity>().ToListAsync();
@@ -45,10 +45,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         Context.Set<TEntity>().Remove(entity);
     }
-    
-    
+
     public void RemoveRange(IEnumerable<TEntity> entities)
     {
         Context.Set<TEntity>().RemoveRange(entities);
+    }
+
+    public EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
+    {
+        return Context.Set<TEntity>().Entry(entity);
     }
 }

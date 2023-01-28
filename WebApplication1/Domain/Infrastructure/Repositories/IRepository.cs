@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace WebApplication1.Domain.Infrastructure.Repositories;
 
-public interface IRepository<TEntity> where TEntity: class
+public interface IRepository<TEntity> where TEntity : class
 {
     Task<ActionResult<IEnumerable<TEntity>>> GetAll();
     Task<ActionResult<TEntity>> Get(int id);
@@ -14,4 +15,5 @@ public interface IRepository<TEntity> where TEntity: class
 
     void Remove(TEntity entity);
     void RemoveRange(IEnumerable<TEntity> entities);
+    EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 }

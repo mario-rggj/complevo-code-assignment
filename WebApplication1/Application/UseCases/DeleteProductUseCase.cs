@@ -1,26 +1,26 @@
-﻿using WebApplication1.Domain.UseCases;
-using WebApplication1.Infrastructure.Context;
+﻿using WebApplication1.Domain.Infrastructure;
+using WebApplication1.Domain.UseCases;
 
 namespace WebApplication1.Application.UseCases;
 
 public class DeleteProductUseCase : IDeleteProductUseCase
 {
-    private readonly ApiContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteProductUseCase(ApiContext context)
+    public DeleteProductUseCase(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task Handle(int id)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _unitOfWork.Products.Get(id);
         if (product == null)
         {
             throw new Exception("Product not found");
         }
 
-        _context.Products.Remove(product);
-        await _context.SaveChangesAsync();
+        _unitOfWork.Products.Remove(product.Value);
+        await _unitOfWork.Complete();
     }
 }

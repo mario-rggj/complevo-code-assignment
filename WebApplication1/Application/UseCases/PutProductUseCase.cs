@@ -1,30 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebApplication1.Domain.Infrastructure;
 using WebApplication1.Domain.Models;
 using WebApplication1.Domain.UseCases;
-using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Application.UseCases;
 
 public class PutProductUseCase : IPutProductUseCase
 {
-    private readonly ApiContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public PutProductUseCase(ApiContext context)
+    public PutProductUseCase(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task Handle(int id, Product product)
     {
-        _context.Entry(product).State = EntityState.Modified;
+        _unitOfWork.Products.Entry(product).State = EntityState.Modified;
 
         try
         {
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Complete();
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!(_context.Products?.Any(e => e.Id == id)).GetValueOrDefault())
+            var instanceDoesntExist = (await _unitOfWork.Products.Get(id)) is null;
+            if (instanceDoesntExist)
             {
                 throw new Exception("Product not found");
             }

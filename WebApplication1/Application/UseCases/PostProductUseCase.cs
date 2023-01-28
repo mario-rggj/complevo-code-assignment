@@ -1,21 +1,21 @@
-﻿using WebApplication1.Domain.Models;
+﻿using WebApplication1.Domain.Infrastructure;
+using WebApplication1.Domain.Models;
 using WebApplication1.Domain.UseCases;
-using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Application.UseCases;
 
 public class PostProductUseCase : IPostProductUseCase
 {
-    private readonly ApiContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public PostProductUseCase(ApiContext context)
+    public PostProductUseCase(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task Handle(Product product)
     {
-        _context.Products.Add(product);
-        await _context.SaveChangesAsync();
+        _unitOfWork.Products.Add(product);
+        await _unitOfWork.Complete();
     }
 }

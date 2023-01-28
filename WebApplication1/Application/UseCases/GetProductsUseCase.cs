@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using WebApplication1.Domain.Infrastructure;
 using WebApplication1.Domain.Models;
 using WebApplication1.Domain.UseCases;
-using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Application.UseCases;
 
 public class GetProductsUseCase : IGetProductsUseCase
 {
-    private readonly ApiContext _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public GetProductsUseCase(ApiContext context)
+    public GetProductsUseCase(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<ActionResult<IEnumerable<Product>>> Handle()
     {
-        return await _context.Products.ToListAsync();
+        return await _unitOfWork.Products.GetAll();
     }
 }
