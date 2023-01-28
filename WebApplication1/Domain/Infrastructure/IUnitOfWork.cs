@@ -5,5 +5,5 @@ namespace WebApplication1.Domain.Infrastructure;
 public interface IUnitOfWork : IDisposable
 {
     IProductRepository Products { get; }
-    int Complete();
+    Task<int> Complete();
 }

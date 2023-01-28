@@ -1,8 +1,9 @@
-﻿using WebApplication1.Domain.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Domain.Models;
 
 namespace WebApplication1.Domain.Infrastructure.Repositories;
 
 public interface IProductRepository : IRepository<Product>
 {
-        IEnumerable<Product> GetAllProductsUnderPrice10();
+        Task<ActionResult<IEnumerable<Product>>> GetAllProductsUnderPrice10();
 }

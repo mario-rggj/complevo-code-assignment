@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
 using WebApplication1.Domain.Infrastructure.Repositories;
 using WebApplication1.Domain.Models;
@@ -12,8 +14,8 @@ public class ProductRepository : Repository<Product>, IProductRepository
     {
     }
 
-    public IEnumerable<Product> GetAllProductsUnderPrice10()
+    public async Task<ActionResult<IEnumerable<Product>>> GetAllProductsUnderPrice10()
     {
-        return Context.Products.Where(p => p.Price < 10m).ToList();
+        return await Context.Products.Where(p => p.Price < 10m).ToListAsync();
     }
 }
