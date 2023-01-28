@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WebApplication1.Domain;
 
-namespace WebApplication1.Context;
+namespace WebApplication1.Infrastructure.Context;
 
 public class ProductConfiguration
 {

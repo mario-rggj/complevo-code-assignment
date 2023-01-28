@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication1.Domain;
 
-namespace WebApplication1.Context;
+namespace WebApplication1.Infrastructure.Context;
 
 public class ApiContext : DbContext
 {

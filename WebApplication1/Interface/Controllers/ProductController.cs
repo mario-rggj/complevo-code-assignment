@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Context;
 using WebApplication1.Domain;
+using WebApplication1.Infrastructure.Context;
 
-namespace WebApplication1.Controllers
+namespace WebApplication1.Interface.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
