@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Application.UseCases;
 using WebApplication1.Domain.Models;
+using WebApplication1.Domain.UseCases;
 
 // TODO: create Patch Method
 // TODO: create class for Product not found exception
@@ -11,18 +11,18 @@ namespace WebApplication1.Interface.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly GetProductsUseCase _getProductsUseCase;
-        private readonly GetProductUseCase _getProductUseCase;
-        private readonly PutProductUseCase _putProductUseCase;
-        private readonly PostProductUseCase _postProductUseCase;
-        private readonly DeleteProductUseCase _deleteProductUseCase;
+        private readonly IGetProductsUseCase _getProductsUseCase;
+        private readonly IGetProductUseCase _getProductUseCase;
+        private readonly IPutProductUseCase _putProductUseCase;
+        private readonly IPostProductUseCase _postProductUseCase;
+        private readonly IDeleteProductUseCase _deleteProductUseCase;
 
         public ProductController(
-            GetProductsUseCase getProductsUseCase,
-            GetProductUseCase getProductUseCase,
-            PutProductUseCase putProductUseCase,
-            PostProductUseCase postProductUseCase,
-            DeleteProductUseCase deleteProductUseCase)
+            IGetProductsUseCase getProductsUseCase,
+            IGetProductUseCase getProductUseCase,
+            IPutProductUseCase putProductUseCase,
+            IPostProductUseCase postProductUseCase,
+            IDeleteProductUseCase deleteProductUseCase)
         {
             _getProductsUseCase = getProductsUseCase;
             _getProductUseCase = getProductUseCase;
@@ -32,6 +32,7 @@ namespace WebApplication1.Interface.Controllers
         }
 
         // GET: api/Product
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {

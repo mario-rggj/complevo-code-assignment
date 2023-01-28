@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication1.Domain.Models;
+using WebApplication1.Domain.UseCases;
 using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Application.UseCases;
 
-public class PutProductUseCase
+public class PutProductUseCase : IPutProductUseCase
 {
     private readonly ApiContext _context;
 

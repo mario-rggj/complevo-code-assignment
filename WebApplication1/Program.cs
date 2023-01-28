@@ -1,6 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Application.UseCases;
+using WebApplication1.Domain.Infrastructure;
+using WebApplication1.Domain.Infrastructure.Repositories;
+using WebApplication1.Domain.UseCases;
+using WebApplication1.Infrastructure;
 using WebApplication1.Infrastructure.Context;
+using WebApplication1.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER") == "true" ? "Docker" : "Default";
@@ -8,11 +13,13 @@ var connectionString = Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER"
 // Add services to the container.
 builder.Services.AddDbContext<ApiContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString)));
-builder.Services.AddScoped<GetProductsUseCase>();
-builder.Services.AddScoped<GetProductUseCase>();
-builder.Services.AddScoped<PutProductUseCase>();
-builder.Services.AddScoped<PostProductUseCase>();
-builder.Services.AddScoped<DeleteProductUseCase>();
+builder.Services.AddScoped<IGetProductsUseCase, GetProductsUseCase>();
+builder.Services.AddScoped<IGetProductUseCase, GetProductUseCase>();
+builder.Services.AddScoped<IPutProductUseCase, PutProductUseCase>();
+builder.Services.AddScoped<IPostProductUseCase,PostProductUseCase>();
+builder.Services.AddScoped<IDeleteProductUseCase,DeleteProductUseCase>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Domain.Models;
+using WebApplication1.Domain.UseCases;
 using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Application.UseCases;
 
-public class GetProductsUseCase
+public class GetProductsUseCase : IGetProductsUseCase
 {
     private readonly ApiContext _context;
 

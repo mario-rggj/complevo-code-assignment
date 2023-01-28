@@ -1,9 +1,10 @@
 ﻿using WebApplication1.Domain.Models;
+using WebApplication1.Domain.UseCases;
 using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Application.UseCases;
 
-public class PostProductUseCase
+public class PostProductUseCase : IPostProductUseCase
 {
     private readonly ApiContext _context;
 

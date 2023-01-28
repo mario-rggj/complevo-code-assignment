@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Domain.Models;
+using WebApplication1.Domain.UseCases;
 using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Application.UseCases;
 
-public class GetProductUseCase
+public class GetProductUseCase : IGetProductUseCase
 {
     private readonly ApiContext _context;
     

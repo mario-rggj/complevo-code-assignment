@@ -1,8 +1,9 @@
-﻿using WebApplication1.Infrastructure.Context;
+﻿using WebApplication1.Domain.UseCases;
+using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Application.UseCases;
 
-public class DeleteProductUseCase
+public class DeleteProductUseCase : IDeleteProductUseCase
 {
     private readonly ApiContext _context;
 
