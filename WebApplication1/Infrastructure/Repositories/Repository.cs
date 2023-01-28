@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
-using WebApplication1.Domain;
+using WebApplication1.Domain.Infrastructure.Repositories;
 using WebApplication1.Infrastructure.Context;
 
 namespace WebApplication1.Infrastructure.Repositories;

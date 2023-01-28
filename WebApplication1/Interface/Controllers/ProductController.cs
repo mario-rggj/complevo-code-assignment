@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Application.UseCases;
-using WebApplication1.Domain;
+using WebApplication1.Domain.Models;
 
 // TODO: create Patch Method
 // TODO: create class for Product not found exception
