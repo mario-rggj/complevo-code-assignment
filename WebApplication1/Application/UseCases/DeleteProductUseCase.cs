@@ -15,7 +15,7 @@ public class DeleteProductUseCase : IDeleteProductUseCase
     public async Task Handle(int id)
     {
         var product = await _unitOfWork.Products.Get(id);
-        if (product == null)
+        if (product.Value == null)
         {
             throw new Exception("Product not found");
         }
