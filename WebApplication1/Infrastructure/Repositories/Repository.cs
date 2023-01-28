@@ -23,7 +23,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
     public async Task<ActionResult<TEntity>> Get(int id)
     {
-        return await Context.Set<TEntity>().FindAsync(id);
+        return (await Context.Set<TEntity>().FindAsync(id))!;
     }
 
     public async Task<ActionResult<IEnumerable<TEntity>>> Find(Expression<Func<TEntity, bool>> predicate)
