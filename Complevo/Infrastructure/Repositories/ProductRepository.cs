@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types;
 using WebApplication1.Domain.Infrastructure.Repositories;
 using WebApplication1.Domain.Models;
 using WebApplication1.Infrastructure.Context;

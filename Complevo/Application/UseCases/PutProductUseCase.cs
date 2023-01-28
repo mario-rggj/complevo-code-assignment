@@ -26,13 +26,8 @@ public class PutProductUseCase : IPutProductUseCase
         {
             var instanceDoesntExist = (await _unitOfWork.Products.Get(id)).Result is null;
             if (instanceDoesntExist)
-            {
                 throw new Exception("Product not found");
-            }
-            else
-            {
-                throw;
-            }
+            throw;
         }
     }
 }

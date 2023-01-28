@@ -16,8 +16,8 @@ builder.Services.AddDbContext<ApiContext>(options =>
 builder.Services.AddScoped<IGetProductsUseCase, GetProductsUseCase>();
 builder.Services.AddScoped<IGetProductUseCase, GetProductUseCase>();
 builder.Services.AddScoped<IPutProductUseCase, PutProductUseCase>();
-builder.Services.AddScoped<IPostProductUseCase,PostProductUseCase>();
-builder.Services.AddScoped<IDeleteProductUseCase,DeleteProductUseCase>();
+builder.Services.AddScoped<IPostProductUseCase, PostProductUseCase>();
+builder.Services.AddScoped<IDeleteProductUseCase, DeleteProductUseCase>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddControllers();
@@ -39,10 +39,7 @@ if (app.Environment.IsDevelopment())
         var services = scope.ServiceProvider;
 
         var context = services.GetRequiredService<ApiContext>();
-        if (context.Database.GetPendingMigrations().Any())
-        {
-            context.Database.Migrate();
-        }
+        if (context.Database.GetPendingMigrations().Any()) context.Database.Migrate();
     }
 }
 
