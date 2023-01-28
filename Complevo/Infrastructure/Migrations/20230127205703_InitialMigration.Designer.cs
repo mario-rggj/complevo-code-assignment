@@ -10,8 +10,8 @@ using WebApplication1.Infrastructure.Context;
 namespace WebApplication1.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20230127221947_ChangeProductPriceToDecimal")]
-    partial class ChangeProductPriceToDecimal
+    [Migration("20230127205703_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace WebApplication1.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication1.Domain.Product", b =>
+            modelBuilder.Entity("Complevo.Domain.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

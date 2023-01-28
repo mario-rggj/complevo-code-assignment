@@ -20,7 +20,7 @@ namespace WebApplication1.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication1.Domain.Product", b =>
+            modelBuilder.Entity("Complevo.Domain.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
