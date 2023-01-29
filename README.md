@@ -1,12 +1,19 @@
+### Setup
+```sh
+# to install linting dependencies
+npm install
+
+# to install dotnet dependencies
+dotnet restore
+```
+
 ### Running
 Deploy locally using docker
 ```sh
 docker-compose up
 ```
-Swagger avaiable at
-```
-http://localhost:8080/swagger/index.html
-```
+Swagger available at [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)
+
 
 ### Debugging
 In order to debug, the database container must be online.
@@ -25,5 +32,5 @@ In order to debug, the database container must be online.
 - [ ] Add Patch method for Product
 - [ ] Create custom exception for entity not found
 - [ ] Automated deploy with GitHub Actions + AWS or Serverless Framework + localstack
-- [ ] pre commit hook to lint staged files
+- [x] pre commit hook to lint staged files
 - [ ] pre push hook to run tests

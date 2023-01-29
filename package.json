@@ -1,0 +1,27 @@
+{
+  "name": "complevo",
+  "version": "1.0.0",
+  "description": "Deploy locally using docker\r ```sh\r docker-compose up\r ```\r Swagger avaiable at\r ```\r http://localhost:8080/swagger/index.html\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "dotnet tool restore && husky install"
+  },
+  "lint-staged": {
+    "*.cs": "dotnet format --include"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mario-rggj/complevo-code-assignment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mario-rggj/complevo-code-assignment/issues"
+  },
+  "homepage": "https://github.com/mario-rggj/complevo-code-assignment#readme",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0"
+  }
+}
