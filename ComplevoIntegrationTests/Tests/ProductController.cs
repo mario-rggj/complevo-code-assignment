@@ -44,6 +44,26 @@ public class ProductController
     Assert.Equivalent(expectedProducts, JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync()));
   }
 
+  [Theory]
+  [ClassData(typeof(GetProductsTestData))]
+  public async Task Get_Product(List<Product> expectedProducts)
+  {
+    // Arrange
+    var sut = MakeSut();
+    sut.Context.Products.AddRange(expectedProducts);
+    await sut.Context.SaveChangesAsync();
+
+    // Act
+    var response1 = await sut.Client.GetAsync("api/Product/1");
+    var response2 = await sut.Client.GetAsync("api/Product/2");
+
+    // Assert
+    response1.EnsureSuccessStatusCode();
+    response2.EnsureSuccessStatusCode();
+    Assert.Equivalent(expectedProducts[0], JsonConvert.DeserializeObject<Product>(await response1.Content.ReadAsStringAsync()));
+    Assert.Equivalent(expectedProducts[1], JsonConvert.DeserializeObject<Product>(await response2.Content.ReadAsStringAsync()));
+  }
+
   [Fact]
   public async Task Post_Product()
   {
