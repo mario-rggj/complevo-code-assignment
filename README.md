@@ -17,8 +17,7 @@ Swagger available at [http://localhost:8080/swagger/index.html](http://localhost
 ### TODO
 - [ ] Finish README 
 - [ ] Add query strings example to API
-- [ ] Unit tests, at least 1
-- [ ] Integration tests for endpoints
+- [x] Integration tests for endpoints
 - [x] Use Docker
 - [x] Implement Repository Pattern
 - [x] Use Separation of Concerns
