@@ -14,10 +14,6 @@ docker-compose up
 ```
 Swagger available at [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)
 
-
-### Debugging
-In order to debug, the database container must be online.
-
 ### TODO
 - [ ] Finish README 
 - [ ] Add query strings example to API

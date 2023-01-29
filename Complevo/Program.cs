@@ -8,11 +8,18 @@ using Complevo.Infrastructure.Context;
 using Complevo.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER") == "true" ? "Docker" : "Default";
+if (Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER") == "true")
+{
+  builder.Services.AddDbContext<ApiContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Docker")));
+}
+else
+{
+  builder.Services.AddDbContext<ApiContext>(options =>
+    options.UseInMemoryDatabase("Complevo"));
+}
 
 // Add services to the container.
-builder.Services.AddDbContext<ApiContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString)));
 builder.Services.AddScoped<IGetProductsUseCase, GetProductsUseCase>();
 builder.Services.AddScoped<IGetProductUseCase, GetProductUseCase>();
 builder.Services.AddScoped<IPutProductUseCase, PutProductUseCase>();
