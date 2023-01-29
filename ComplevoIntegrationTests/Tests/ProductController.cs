@@ -106,4 +106,24 @@ public class ProductController
     response.EnsureSuccessStatusCode();
     Assert.Equivalent(sut.Context.Products.Single((p => p.Id == 1)), product);
   }
+
+  [Fact]
+  public async Task Delete_Product()
+  {
+    var sut = MakeSut();
+    var product = new Product
+    {
+      Id = 1,
+      Name = "Name1",
+      Description = "Description1",
+      Price = 1.0m
+    };
+    sut.Context.Products.Add(product);
+    await sut.Context.SaveChangesAsync();
+
+    var response = await sut.Client.DeleteAsync("api/Product/1");
+
+    response.EnsureSuccessStatusCode();
+    Assert.Equivalent(sut.Context.Products.Any((p => p.Id == 1)), false);
+  }
 }
