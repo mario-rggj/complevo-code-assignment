@@ -1,7 +1,6 @@
+using System.Text;
 using Complevo.Domain.Models;
-using Complevo.Infrastructure.Context;
 using ComplevoIntegrationTests.Helpers;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
 namespace ComplevoIntegrationTests.Tests;
@@ -33,13 +32,12 @@ public class ProductController
   public async Task Get_Products(List<Product> expectedProducts)
   {
     // Arrange
-    var client = _factory.CreateClient();
-    var db = GetDbContext();
-    db.Products.AddRange(expectedProducts);
-    await db.SaveChangesAsync();
+    var sut = MakeSut();
+    sut.Context.Products.AddRange(expectedProducts);
+    await sut.Context.SaveChangesAsync();
 
     // Act
-    var response = await client.GetAsync("api/Product");
+    var response = await sut.Client.GetAsync("api/Product");
 
     // Assert
     response.EnsureSuccessStatusCode();
