@@ -43,4 +43,23 @@ public class ProductController
     response.EnsureSuccessStatusCode();
     Assert.Equivalent(expectedProducts, JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync()));
   }
+
+  [Fact]
+  public async Task Post_Product()
+  {
+    var sut = MakeSut();
+    var product = new Product
+    {
+      Id = 1,
+      Name = "Name1",
+      Description = "Description1",
+      Price = 1.0m
+    };
+    var contentString = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+
+    var response = await sut.Client.PostAsync("api/Product", contentString);
+
+    response.EnsureSuccessStatusCode();
+    Assert.Equivalent(sut.Context.Products.Single((p => p.Id == 1)), product);
+  }
 }
