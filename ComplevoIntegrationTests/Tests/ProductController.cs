@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text;
 using Complevo.Domain.Models;
 using ComplevoIntegrationTests.Helpers;
@@ -125,5 +126,15 @@ public class ProductController
 
     response.EnsureSuccessStatusCode();
     Assert.Equivalent(sut.Context.Products.Any((p => p.Id == 1)), false);
+  }
+
+  [Fact]
+  public async Task Delete_Product_Should_Respond_404_When_Product_Not_Found()
+  {
+    var sut = MakeSut();
+
+    var response = await sut.Client.DeleteAsync("api/Product/1");
+
+    Assert.Equal((HttpStatusCode)404, response.StatusCode);
   }
 }
