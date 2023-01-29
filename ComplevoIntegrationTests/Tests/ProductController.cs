@@ -62,4 +62,28 @@ public class ProductController
     response.EnsureSuccessStatusCode();
     Assert.Equivalent(sut.Context.Products.Single((p => p.Id == 1)), product);
   }
+
+  [Fact]
+  public async Task Put_Product()
+  {
+    var sut = MakeSut();
+    var product = new Product
+    {
+      Id = 1,
+      Name = "Name1",
+      Description = "Description1",
+      Price = 1.0m
+    };
+    sut.Context.Products.Add(product);
+    await sut.Context.SaveChangesAsync();
+    product.Name = "Name2";
+    product.Description = "Description2";
+    product.Price = 2m;
+    var contentString = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+
+    var response = await sut.Client.PutAsync("api/Product/1", contentString);
+
+    response.EnsureSuccessStatusCode();
+    Assert.Equivalent(sut.Context.Products.Single((p => p.Id == 1)), product);
+  }
 }
