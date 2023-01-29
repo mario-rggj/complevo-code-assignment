@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Complevo", "Complevo\Complevo.csproj", "{829D891C-E918-446E-9039-01766A5F919F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComplevoIntegrationTests", "ComplevoIntegrationTests\ComplevoIntegrationTests.csproj", "{3963A52E-DE91-45CB-97E3-A2261F4664DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{829D891C-E918-446E-9039-01766A5F919F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{829D891C-E918-446E-9039-01766A5F919F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{829D891C-E918-446E-9039-01766A5F919F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3963A52E-DE91-45CB-97E3-A2261F4664DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3963A52E-DE91-45CB-97E3-A2261F4664DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3963A52E-DE91-45CB-97E3-A2261F4664DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3963A52E-DE91-45CB-97E3-A2261F4664DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
