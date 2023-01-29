@@ -109,6 +109,46 @@ public class ProductController
   }
 
   [Fact]
+  public async Task Put_Product_Should_Respond_404_When_Product_Not_Found()
+  {
+    var sut = MakeSut();
+    var product = new Product
+    {
+      Id = 1,
+      Name = "Name1",
+      Description = "Description1",
+      Price = 1.0m
+    };
+    var contentString = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+
+    var response = await sut.Client.PutAsync("api/Product/1", contentString);
+
+    Assert.Equal((HttpStatusCode)404, response.StatusCode);
+  }
+
+  [Fact]
+  public async Task Put_Product_Should_Respond_400_When_Product_Id_Doesnt_Match()
+  {
+    var sut = MakeSut();
+    var product = new Product
+    {
+      Id = 1,
+      Name = "Name1",
+      Description = "Description1",
+      Price = 1.0m
+    };
+    sut.Context.Products.Add(product);
+    await sut.Context.SaveChangesAsync();
+    product.Id = 2;
+
+    var contentString = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+
+    var response = await sut.Client.PutAsync("api/Product/1", contentString);
+
+    Assert.Equal((HttpStatusCode)400, response.StatusCode);
+  }
+
+  [Fact]
   public async Task Delete_Product()
   {
     var sut = MakeSut();
