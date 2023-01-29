@@ -85,6 +85,26 @@ public class ProductController
   }
 
   [Fact]
+  public async Task Post_Product_Should_Respond_409_When_Product_Already_Exists()
+  {
+    var sut = MakeSut();
+    var product = new Product
+    {
+      Id = 1,
+      Name = "Name1",
+      Description = "Description1",
+      Price = 1.0m
+    };
+    sut.Context.Products.Add(product);
+    await sut.Context.SaveChangesAsync();
+    var contentString = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+
+    var response = await sut.Client.PostAsync("api/Product", contentString);
+
+    Assert.Equal((HttpStatusCode)409, response.StatusCode);
+  }
+
+  [Fact]
   public async Task Put_Product()
   {
     var sut = MakeSut();

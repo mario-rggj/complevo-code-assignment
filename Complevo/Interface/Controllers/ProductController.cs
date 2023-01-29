@@ -71,7 +71,15 @@ public class ProductController : ControllerBase
   [HttpPost]
   public async Task<ActionResult<Product>> PostProduct(Product product)
   {
-    await _postProductUseCase.Handle(product);
+    try
+    {
+      await _postProductUseCase.Handle(product);
+    }
+    catch (Exception e)
+      when (e.Message.Contains("An item with the same key has already been added"))
+    {
+      return Conflict();
+    }
 
     return CreatedAtAction("GetProduct", new { id = product.Id }, product);
   }
