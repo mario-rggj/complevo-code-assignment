@@ -5,9 +5,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using WebApplication1.Infrastructure.Context;
+using Complevo.Infrastructure.Context;
 
-namespace WebApplication1.Infrastructure.Migrations
+namespace Complevo.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiContext))]
     [Migration("20230127221947_ChangeProductPriceToDecimal")]

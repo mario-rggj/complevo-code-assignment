@@ -1,8 +1,8 @@
-﻿using WebApplication1.Domain.Infrastructure;
-using WebApplication1.Domain.Models;
-using WebApplication1.Domain.UseCases;
+﻿using Complevo.Domain.Infrastructure;
+using Complevo.Domain.Models;
+using Complevo.Domain.UseCases;
 
-namespace WebApplication1.Application.UseCases;
+namespace Complevo.Application.UseCases;
 
 public class PostProductUseCase : IPostProductUseCase
 {

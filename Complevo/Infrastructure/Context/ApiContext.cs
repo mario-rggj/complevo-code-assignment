@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebApplication1.Domain.Models;
+using Complevo.Domain.Models;
 
-namespace WebApplication1.Infrastructure.Context;
+namespace Complevo.Infrastructure.Context;
 
 public class ApiContext : DbContext
 {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace WebApplication1.Domain.Infrastructure.Repositories;
+namespace Complevo.Domain.Infrastructure.Repositories;
 
 public interface IRepository<TEntity> where TEntity : class
 {

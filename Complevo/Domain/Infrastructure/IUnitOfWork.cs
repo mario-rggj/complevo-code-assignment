@@ -1,6 +1,6 @@
-﻿using WebApplication1.Domain.Infrastructure.Repositories;
+﻿using Complevo.Domain.Infrastructure.Repositories;
 
-namespace WebApplication1.Domain.Infrastructure;
+namespace Complevo.Domain.Infrastructure;
 
 public interface IUnitOfWork : IDisposable
 {

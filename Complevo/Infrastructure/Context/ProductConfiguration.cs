@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using WebApplication1.Domain.Models;
+using Complevo.Domain.Models;
 
-namespace WebApplication1.Infrastructure.Context;
+namespace Complevo.Infrastructure.Context;
 
 public class ProductConfiguration
 {

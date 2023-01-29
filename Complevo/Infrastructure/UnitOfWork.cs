@@ -1,9 +1,9 @@
-﻿using WebApplication1.Domain.Infrastructure;
-using WebApplication1.Domain.Infrastructure.Repositories;
-using WebApplication1.Infrastructure.Context;
-using WebApplication1.Infrastructure.Repositories;
+﻿using Complevo.Domain.Infrastructure;
+using Complevo.Domain.Infrastructure.Repositories;
+using Complevo.Infrastructure.Context;
+using Complevo.Infrastructure.Repositories;
 
-namespace WebApplication1.Infrastructure;
+namespace Complevo.Infrastructure;
 
 public class UnitOfWork : IUnitOfWork
 {

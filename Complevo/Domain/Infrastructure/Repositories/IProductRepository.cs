@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Domain.Models;
+using Complevo.Domain.Models;
 
-namespace WebApplication1.Domain.Infrastructure.Repositories;
+namespace Complevo.Domain.Infrastructure.Repositories;
 
 public interface IProductRepository : IRepository<Product>
 {

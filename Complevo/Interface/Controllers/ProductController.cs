@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Domain.Models;
-using WebApplication1.Domain.UseCases;
+using Complevo.Domain.Models;
+using Complevo.Domain.UseCases;
 
-namespace WebApplication1.Interface.Controllers;
+namespace Complevo.Interface.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

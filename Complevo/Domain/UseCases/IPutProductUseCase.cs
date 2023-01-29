@@ -1,6 +1,6 @@
-﻿using WebApplication1.Domain.Models;
+﻿using Complevo.Domain.Models;
 
-namespace WebApplication1.Domain.UseCases;
+namespace Complevo.Domain.UseCases;
 
 public interface IPutProductUseCase
 {

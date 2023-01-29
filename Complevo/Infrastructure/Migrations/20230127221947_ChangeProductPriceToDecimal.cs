@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WebApplication1.Infrastructure.Migrations
+namespace Complevo.Infrastructure.Migrations
 {
   /// <inheritdoc />
   public partial class ChangeProductPriceToDecimal : Migration

@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Domain.Models;
+﻿namespace Complevo.Domain.Models;
 
 public class Product
 {

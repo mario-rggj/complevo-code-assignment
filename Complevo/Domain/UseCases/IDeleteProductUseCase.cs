@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Domain.UseCases;
+﻿namespace Complevo.Domain.UseCases;
 
 public interface IDeleteProductUseCase
 {

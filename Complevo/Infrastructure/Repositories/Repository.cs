@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using WebApplication1.Domain.Infrastructure.Repositories;
-using WebApplication1.Infrastructure.Context;
+using Complevo.Domain.Infrastructure.Repositories;
+using Complevo.Infrastructure.Context;
 
-namespace WebApplication1.Infrastructure.Repositories;
+namespace Complevo.Infrastructure.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {

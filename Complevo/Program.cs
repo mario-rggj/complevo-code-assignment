@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Application.UseCases;
-using WebApplication1.Domain.Infrastructure;
-using WebApplication1.Domain.Infrastructure.Repositories;
-using WebApplication1.Domain.UseCases;
-using WebApplication1.Infrastructure;
-using WebApplication1.Infrastructure.Context;
-using WebApplication1.Infrastructure.Repositories;
+using Complevo.Application.UseCases;
+using Complevo.Domain.Infrastructure;
+using Complevo.Domain.Infrastructure.Repositories;
+using Complevo.Domain.UseCases;
+using Complevo.Infrastructure;
+using Complevo.Infrastructure.Context;
+using Complevo.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER") == "true" ? "Docker" : "Default";
@@ -50,3 +50,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Domain.Infrastructure.Repositories;
-using WebApplication1.Domain.Models;
-using WebApplication1.Infrastructure.Context;
+using Complevo.Domain.Infrastructure.Repositories;
+using Complevo.Domain.Models;
+using Complevo.Infrastructure.Context;
 
-namespace WebApplication1.Infrastructure.Repositories;
+namespace Complevo.Infrastructure.Repositories;
 
 public class ProductRepository : Repository<Product>, IProductRepository
 {
