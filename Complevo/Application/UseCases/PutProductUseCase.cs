@@ -7,27 +7,27 @@ namespace WebApplication1.Application.UseCases;
 
 public class PutProductUseCase : IPutProductUseCase
 {
-    private readonly IUnitOfWork _unitOfWork;
+  private readonly IUnitOfWork _unitOfWork;
 
-    public PutProductUseCase(IUnitOfWork unitOfWork)
+  public PutProductUseCase(IUnitOfWork unitOfWork)
+  {
+    _unitOfWork = unitOfWork;
+  }
+
+  public async Task Handle(int id, Product product)
+  {
+    _unitOfWork.Products.Entry(product).State = EntityState.Modified;
+
+    try
     {
-        _unitOfWork = unitOfWork;
+      await _unitOfWork.Complete();
     }
-
-    public async Task Handle(int id, Product product)
+    catch (DbUpdateConcurrencyException)
     {
-        _unitOfWork.Products.Entry(product).State = EntityState.Modified;
-
-        try
-        {
-            await _unitOfWork.Complete();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            var instanceDoesntExist = (await _unitOfWork.Products.Get(id)).Result is null;
-            if (instanceDoesntExist)
-                throw new Exception("Product not found");
-            throw;
-        }
+      var instanceDoesntExist = (await _unitOfWork.Products.Get(id)).Result is null;
+      if (instanceDoesntExist)
+        throw new Exception("Product not found");
+      throw;
     }
+  }
 }

@@ -5,15 +5,15 @@ namespace WebApplication1.Infrastructure.Context;
 
 public class ApiContext : DbContext
 {
-    public ApiContext(DbContextOptions<ApiContext> options) : base(options)
-    {
-    }
+  public ApiContext(DbContextOptions<ApiContext> options) : base(options)
+  {
+  }
 
-    public DbSet<Product> Products { get; set; }
+  public DbSet<Product> Products { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        new ProductConfiguration(modelBuilder.Entity<Product>());
-    }
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    base.OnModelCreating(modelBuilder);
+    new ProductConfiguration(modelBuilder.Entity<Product>());
+  }
 }

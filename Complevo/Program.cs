@@ -30,17 +30,17 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+  app.UseSwagger();
+  app.UseSwaggerUI();
 
-    if (Environment.GetEnvironmentVariable("ENABLE_AUTOMATIC_MIGRATION") == "true")
-    {
-        using var scope = app.Services.CreateScope();
-        var services = scope.ServiceProvider;
+  if (Environment.GetEnvironmentVariable("ENABLE_AUTOMATIC_MIGRATION") == "true")
+  {
+    using var scope = app.Services.CreateScope();
+    var services = scope.ServiceProvider;
 
-        var context = services.GetRequiredService<ApiContext>();
-        if (context.Database.GetPendingMigrations().Any()) context.Database.Migrate();
-    }
+    var context = services.GetRequiredService<ApiContext>();
+    if (context.Database.GetPendingMigrations().Any()) context.Database.Migrate();
+  }
 }
 
 app.UseHttpsRedirection();

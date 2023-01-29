@@ -4,19 +4,19 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApplication1.Infrastructure.Migrations
 {
+  /// <inheritdoc />
+  public partial class ChangeProductPriceToDecimal : Migration
+  {
     /// <inheritdoc />
-    public partial class ChangeProductPriceToDecimal : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
 
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-
-        }
     }
+
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+
+    }
+  }
 }

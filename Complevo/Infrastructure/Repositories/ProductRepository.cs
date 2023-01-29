@@ -8,12 +8,12 @@ namespace WebApplication1.Infrastructure.Repositories;
 
 public class ProductRepository : Repository<Product>, IProductRepository
 {
-    public ProductRepository(ApiContext context) : base(context)
-    {
-    }
+  public ProductRepository(ApiContext context) : base(context)
+  {
+  }
 
-    public async Task<ActionResult<IEnumerable<Product>>> GetAllProductsUnderPrice10()
-    {
-        return await Context.Products.Where(p => p.Price < 10m).ToListAsync();
-    }
+  public async Task<ActionResult<IEnumerable<Product>>> GetAllProductsUnderPrice10()
+  {
+    return await Context.Products.Where(p => p.Price < 10m).ToListAsync();
+  }
 }

@@ -7,23 +7,23 @@ namespace WebApplication1.Infrastructure;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly ApiContext _context;
+  private readonly ApiContext _context;
 
-    public UnitOfWork(ApiContext context)
-    {
-        _context = context;
-        Products = new ProductRepository(_context);
-    }
+  public UnitOfWork(ApiContext context)
+  {
+    _context = context;
+    Products = new ProductRepository(_context);
+  }
 
-    public IProductRepository Products { get; }
+  public IProductRepository Products { get; }
 
-    public Task<int> Complete()
-    {
-        return _context.SaveChangesAsync();
-    }
+  public Task<int> Complete()
+  {
+    return _context.SaveChangesAsync();
+  }
 
-    public void Dispose()
-    {
-        _context.DisposeAsync();
-    }
+  public void Dispose()
+  {
+    _context.DisposeAsync();
+  }
 }

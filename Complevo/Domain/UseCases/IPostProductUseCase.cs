@@ -4,5 +4,5 @@ namespace WebApplication1.Domain.UseCases;
 
 public interface IPostProductUseCase
 {
-    Task Handle(Product product);
+  Task Handle(Product product);
 }

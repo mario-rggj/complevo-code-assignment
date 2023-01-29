@@ -7,15 +7,15 @@ namespace WebApplication1.Application.UseCases;
 
 public class GetProductUseCase : IGetProductUseCase
 {
-    private readonly IUnitOfWork _unitOfWork;
+  private readonly IUnitOfWork _unitOfWork;
 
-    public GetProductUseCase(IUnitOfWork unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
-    }
+  public GetProductUseCase(IUnitOfWork unitOfWork)
+  {
+    _unitOfWork = unitOfWork;
+  }
 
-    public async Task<ActionResult<Product>> Handle(int id)
-    {
-        return await _unitOfWork.Products.Get(id);
-    }
+  public async Task<ActionResult<Product>> Handle(int id)
+  {
+    return await _unitOfWork.Products.Get(id);
+  }
 }

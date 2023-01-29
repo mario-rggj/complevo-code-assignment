@@ -2,5 +2,5 @@
 
 public interface IDeleteProductUseCase
 {
-    Task Handle(int id);
+  Task Handle(int id);
 }

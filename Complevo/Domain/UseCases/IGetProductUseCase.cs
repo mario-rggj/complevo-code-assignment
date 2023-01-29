@@ -5,5 +5,5 @@ namespace WebApplication1.Domain.UseCases;
 
 public interface IGetProductUseCase
 {
-    Task<ActionResult<Product>> Handle(int id);
+  Task<ActionResult<Product>> Handle(int id);
 }

@@ -6,10 +6,10 @@ namespace WebApplication1.Infrastructure.Context;
 
 public class ProductConfiguration
 {
-    public ProductConfiguration(EntityTypeBuilder<Product> entityBuilder)
-    {
-        entityBuilder
-            .Property(p => p.Price)
-            .HasColumnType("decimal(18,2)");
-    }
+  public ProductConfiguration(EntityTypeBuilder<Product> entityBuilder)
+  {
+    entityBuilder
+        .Property(p => p.Price)
+        .HasColumnType("decimal(18,2)");
+  }
 }
