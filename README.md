@@ -90,9 +90,10 @@ But on a real world application it wouldn't be a simple personal preference for 
 - [x] API should be documented;
 
 ### Extra TODO
-
 - [ ] Add Name and Description search filter to the get all endpoint
 - [ ] Add sorting to the get all endpoint
+- [ ] Create CreatedAt and UpdatedAt properties with DTO to hide them
+- [ ] Use soft delete/paranoid tables
 - [ ] Add Patch method for Product
 - [ ] Automated deploy with GitHub Actions + AWS or Serverless Framework + localstack
 - [x] Add exception handler middleware 
@@ -103,6 +104,7 @@ But on a real world application it wouldn't be a simple personal preference for 
 - [x] Implement Repository Pattern
 - [x] Use Separation of Concerns
 - [x] Apply Dependency Inversion Principle
+- [x] Apply Interface Segregation Principle
 - [x] pre commit hook to lint staged files
 - [x] pre commit hook to run tests
 - ~~hide secrets with Secret Manager tool~~
