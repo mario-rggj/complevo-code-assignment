@@ -1,8 +1,9 @@
 ﻿using Complevo.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Complevo.Domain.UseCases;
 
 public interface IPostProductUseCase
 {
-  Task Handle(Product product);
+  Task<bool> Handle(Product product);
 }

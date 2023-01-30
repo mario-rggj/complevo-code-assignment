@@ -65,9 +65,9 @@ public class ProductController : ControllerBase
   {
     var product = productDto.CastToDomainClass();
 
-    await _postProductUseCase.Handle(product);
-
-    return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+    if (await _postProductUseCase.Handle(product))
+      return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+    return Conflict();
   }
 
   // DELETE: api/Product/5

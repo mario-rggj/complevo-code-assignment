@@ -85,7 +85,7 @@ But on a real world application it wouldn't be a simple personal preference for 
 ## TODO
 ### Acceptance Criteria
 - [x] Be able to create, update and delete products;
-- [ ] A product cannot be duplicated;
+- [x] A product cannot be duplicated;
 - [x] The data should be persisted for a future search;
 - [x] API should be documented;
 

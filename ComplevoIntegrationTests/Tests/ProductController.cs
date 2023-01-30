@@ -3,6 +3,7 @@ using System.Text;
 using Complevo.Domain.Models;
 using ComplevoIntegrationTests.Helpers;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace ComplevoIntegrationTests.Tests;
@@ -140,6 +141,27 @@ public class ProductController
   }
 
   [Fact]
+  public async Task Post_Product_Should_Respond_409_When_Product_Name_Already_Persisted()
+  {
+    var sut = MakeSut();
+    var product = new Product
+    {
+      Name = "Name1",
+      Description = "Description1",
+      Price = 1.0m
+    };
+    sut.Context.Products.Add(product);
+    await sut.Context.SaveChangesAsync();
+    var contentString = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+
+    var response = await sut.Client.PostAsync("api/Product", contentString);
+
+    product.Id = 1;
+    Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    Assert.Equivalent(sut.Context.Products.Where(p => p.Id == 1).ToList().Count, 1);
+  }
+
+  [Fact]
   public async Task Post_Product_Should_Ignore_Id_Property()
   {
     var sut = MakeSut();
@@ -151,6 +173,7 @@ public class ProductController
     };
     sut.Context.Products.Add(product);
     await sut.Context.SaveChangesAsync();
+    product.Name = "Name2";
     var contentString = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
 
     var response = await sut.Client.PostAsync("api/Product", contentString);
