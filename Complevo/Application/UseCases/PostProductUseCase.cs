@@ -1,6 +1,7 @@
 ﻿using Complevo.Domain.Infrastructure;
 using Complevo.Domain.Models;
 using Complevo.Domain.UseCases;
+using Microsoft.EntityFrameworkCore;
 
 namespace Complevo.Application.UseCases;
 

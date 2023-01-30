@@ -24,26 +24,26 @@ public class ProductController
     {
       Add(new List<Product>
       {
-        new Product {Id = 1, Name = "Name1", Description = "Description1", Price = 1m},
-        new Product {Id = 2, Name = "Name2", Description = "Description2", Price = 2m},
-        new Product {Id = 3, Name = "Name3", Description = "Description3", Price = 2m},
-        new Product {Id = 4, Name = "Name4", Description = "Description4", Price = 2m},
-        new Product {Id = 5, Name = "Name5", Description = "Description5", Price = 2m},
-        new Product {Id = 6, Name = "Name6", Description = "Description6", Price = 2m},
-        new Product {Id = 7, Name = "Name7", Description = "Description7", Price = 2m},
-        new Product {Id = 8, Name = "Name8", Description = "Description8", Price = 2m},
-        new Product {Id = 9, Name = "Name9", Description = "Description9", Price = 2m},
-        new Product {Id = 10, Name = "Name10", Description = "Description10", Price = 2m},
-        new Product {Id = 11, Name = "Name11", Description = "Description11", Price = 2m},
-        new Product {Id = 12, Name = "Name12", Description = "Description12", Price = 2m},
-        new Product {Id = 13, Name = "Name13", Description = "Description13", Price = 2m},
-        new Product {Id = 14, Name = "Name14", Description = "Description14", Price = 2m},
-        new Product {Id = 15, Name = "Name15", Description = "Description15", Price = 2m},
-        new Product {Id = 16, Name = "Name16", Description = "Description16", Price = 2m},
-        new Product {Id = 17, Name = "Name17", Description = "Description17", Price = 2m},
-        new Product {Id = 18, Name = "Name18", Description = "Description18", Price = 2m},
-        new Product {Id = 19, Name = "Name19", Description = "Description19", Price = 2m},
-        new Product {Id = 20, Name = "Name20", Description = "Description20", Price = 2m}
+        new Product {Name = "Name1", Description = "Description1", Price = 1m},
+        new Product {Name = "Name2", Description = "Description2", Price = 2m},
+        new Product {Name = "Name3", Description = "Description3", Price = 2m},
+        new Product {Name = "Name4", Description = "Description4", Price = 2m},
+        new Product {Name = "Name5", Description = "Description5", Price = 2m},
+        new Product {Name = "Name6", Description = "Description6", Price = 2m},
+        new Product {Name = "Name7", Description = "Description7", Price = 2m},
+        new Product {Name = "Name8", Description = "Description8", Price = 2m},
+        new Product {Name = "Name9", Description = "Description9", Price = 2m},
+        new Product {Name = "Name10", Description = "Description10", Price = 2m},
+        new Product {Name = "Name11", Description = "Description11", Price = 2m},
+        new Product {Name = "Name12", Description = "Description12", Price = 2m},
+        new Product {Name = "Name13", Description = "Description13", Price = 2m},
+        new Product {Name = "Name14", Description = "Description14", Price = 2m},
+        new Product {Name = "Name15", Description = "Description15", Price = 2m},
+        new Product {Name = "Name16", Description = "Description16", Price = 2m},
+        new Product {Name = "Name17", Description = "Description17", Price = 2m},
+        new Product {Name = "Name18", Description = "Description18", Price = 2m},
+        new Product {Name = "Name19", Description = "Description19", Price = 2m},
+        new Product {Name = "Name20", Description = "Description20", Price = 2m}
       });
     }
   }
@@ -125,7 +125,6 @@ public class ProductController
     var sut = MakeSut();
     var product = new Product
     {
-      Id = 1,
       Name = "Name1",
       Description = "Description1",
       Price = 1.0m
@@ -134,17 +133,17 @@ public class ProductController
 
     var response = await sut.Client.PostAsync("api/Product", contentString);
 
+    product.Id = 1;
     response.EnsureSuccessStatusCode();
     Assert.Equivalent(sut.Context.Products.Single((p => p.Id == 1)), product);
   }
 
   [Fact]
-  public async Task Post_Product_Should_Respond_409_When_Product_Already_Exists()
+  public async Task Post_Product_Should_Ignore_Id_Property()
   {
     var sut = MakeSut();
     var product = new Product
     {
-      Id = 1,
       Name = "Name1",
       Description = "Description1",
       Price = 1.0m
@@ -155,7 +154,7 @@ public class ProductController
 
     var response = await sut.Client.PostAsync("api/Product", contentString);
 
-    Assert.Equal((HttpStatusCode)409, response.StatusCode);
+    Assert.Equal((HttpStatusCode)201, response.StatusCode);
   }
 
   [Fact]
@@ -164,7 +163,6 @@ public class ProductController
     var sut = MakeSut();
     var product = new Product
     {
-      Id = 1,
       Name = "Name1",
       Description = "Description1",
       Price = 1.0m
@@ -206,7 +204,6 @@ public class ProductController
     var sut = MakeSut();
     var product = new Product
     {
-      Id = 1,
       Name = "Name1",
       Description = "Description1",
       Price = 1.0m
@@ -228,7 +225,6 @@ public class ProductController
     var sut = MakeSut();
     var product = new Product
     {
-      Id = 1,
       Name = "Name1",
       Description = "Description1",
       Price = 1.0m

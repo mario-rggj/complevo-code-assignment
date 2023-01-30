@@ -10,7 +10,7 @@ public struct Sut
 }
 
 public class TestClass
-  : IClassFixture<CustomWebApplicationFactory<Program>>
+  : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
   private readonly CustomWebApplicationFactory<Program> _factory;
   private readonly ApiContext _context;
@@ -22,6 +22,13 @@ public class TestClass
     var scopedServices = scope.ServiceProvider;
     var context = scopedServices.GetRequiredService<ApiContext>();
     _context = context;
+    _context.Database.EnsureDeleted();
+  }
+
+  public void Dispose()
+  {
+    _context.Database.EnsureDeleted();
+    _context.Dispose();
   }
 
   protected Sut MakeSut()

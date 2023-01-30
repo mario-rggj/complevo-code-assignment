@@ -1,11 +1,12 @@
 {
   "name": "complevo",
   "version": "1.0.0",
-  "description": "Deploy locally using docker\r ```sh\r docker-compose up\r ```\r Swagger avaiable at\r ```\r http://localhost:8080/swagger/index.html\r ```",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "dotnet tool restore && husky install"
+    "prepare": "dotnet tool restore && husky install",
+    "docker-compose": "docker-compose up",
+    "docker-compose:db": "docker-compose up -d db"
   },
   "lint-staged": {
     "*.cs": "dotnet format --include"

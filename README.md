@@ -1,3 +1,7 @@
+### Prerequisites
+- Docker
+- .NET 7.0
+- Node (only for linting purposes)
 ### Setup
 ```sh
 # to install linting dependencies
@@ -13,6 +17,14 @@ Deploy locally using docker
 docker-compose up
 ```
 Swagger available at [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)
+
+- **If you are running through an IDE or profile, check if the database container is up** 
+
+### Testing
+```sh
+dotnet test
+```
+- **The integration tests uses an SQLServer instance, so check if db container is up before running tests**
 
 ### TODO
 - [ ] Finish README 
@@ -30,4 +42,4 @@ Swagger available at [http://localhost:8080/swagger/index.html](http://localhost
 - [ ] Create custom exception for entity not found
 - [ ] Automated deploy with GitHub Actions + AWS or Serverless Framework + localstack
 - [x] pre commit hook to lint staged files
-- [ ] pre push hook to run tests
+- [x] pre commit hook to run tests

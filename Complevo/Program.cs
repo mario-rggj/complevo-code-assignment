@@ -8,16 +8,9 @@ using Complevo.Infrastructure.Context;
 using Complevo.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-if (Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER") == "true")
-{
-  builder.Services.AddDbContext<ApiContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Docker")));
-}
-else
-{
-  builder.Services.AddDbContext<ApiContext>(options =>
-    options.UseInMemoryDatabase("Complevo"));
-}
+var connectionString = Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER") == "true" ? "Docker" : "Default";
+builder.Services.AddDbContext<ApiContext>(options =>
+  options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString)));
 
 // Add services to the container.
 builder.Services.AddScoped<IGetProductsUseCase, GetProductsUseCase>();
@@ -40,14 +33,11 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 
-  if (Environment.GetEnvironmentVariable("ENABLE_AUTOMATIC_MIGRATION") == "true")
-  {
-    using var scope = app.Services.CreateScope();
-    var services = scope.ServiceProvider;
+  using var scope = app.Services.CreateScope();
+  var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<ApiContext>();
-    if (context.Database.GetPendingMigrations().Any()) context.Database.Migrate();
-  }
+  var context = services.GetRequiredService<ApiContext>();
+  if (context.Database.GetPendingMigrations().Any()) context.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
