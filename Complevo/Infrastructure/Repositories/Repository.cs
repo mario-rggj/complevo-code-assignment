@@ -26,6 +26,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     return (await Context.Set<TEntity>().FindAsync(id))!;
   }
 
+  public async Task<bool> Exist(int id)
+  {
+    return (await Get(id)).Value is not null;
+  }
+
   public async Task<ActionResult<IEnumerable<TEntity>>> Find(Expression<Func<TEntity, bool>> predicate)
   {
     return await Context.Set<TEntity>().Where(predicate).ToListAsync();

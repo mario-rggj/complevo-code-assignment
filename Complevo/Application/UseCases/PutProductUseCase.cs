@@ -24,8 +24,8 @@ public class PutProductUseCase : IPutProductUseCase
     }
     catch (DbUpdateConcurrencyException exception)
     {
-      var instanceDoesntExist = (await _unitOfWork.Products.Get(id)).Result is null;
-      if (instanceDoesntExist)
+      var instanceExists = await _unitOfWork.Products.Exist(id);
+      if (instanceExists)
         return false;
       throw;
     }
