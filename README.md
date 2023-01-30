@@ -38,6 +38,8 @@ Components:
   - The Controllers are responsible for mapping endpoints routes, converting domain objects to HTTP responses.
 - DTOs
   - The DTOs acts as ModelView for when requests body or responses slightly different than the Domain classes.
+- Middlewares
+  - Middleware classes to inspect requests and responses
 
 #### Application
 The application layer is the layer between the API Interface layer, and the Domain layer. Its purpose is to decouple the Interface layer from the rest of the application, preventing the Interface layer from having direct access to the Domain and data manipulation services. It also coordinates interactions between Domain and Infrastructure classes, like persisting new Model instances.
@@ -83,6 +85,7 @@ But on a real world application it wouldn't be a simple personal preference for 
 ### TODO
 - [ ] Add Name and Description search filter to the get all endpoint
 - [ ] Add sorting to the get all endpoint
+- [x] Add exception handler middleware 
 - [x] Finish README 
 - [x] Add query strings example to API
 - [x] Integration tests for endpoints

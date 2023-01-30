@@ -26,5 +26,9 @@
     <ItemGroup>
         <ProjectReference Include="..\Complevo\Complevo.csproj" />
     </ItemGroup>
+    
+    <Target Name="DbContainerUp" BeforeTargets="VSTest" AfterTargets="AfterBuild">
+        <Exec Command="docker compose up -d db" />
+    </Target>
 
 </Project>
