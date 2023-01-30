@@ -14,7 +14,7 @@ public class PutProductUseCase : IPutProductUseCase
     _unitOfWork = unitOfWork;
   }
 
-  public async Task Handle(int id, Product product)
+  public async Task<bool> Handle(int id, Product product)
   {
     _unitOfWork.Products.Entry(product).State = EntityState.Modified;
 
@@ -22,12 +22,14 @@ public class PutProductUseCase : IPutProductUseCase
     {
       await _unitOfWork.Complete();
     }
-    catch (DbUpdateConcurrencyException)
+    catch (DbUpdateConcurrencyException exception)
     {
       var instanceDoesntExist = (await _unitOfWork.Products.Get(id)).Result is null;
       if (instanceDoesntExist)
-        throw new Exception("Product not found");
+        return false;
       throw;
     }
+
+    return true;
   }
 }

@@ -6,6 +6,7 @@ using Complevo.Domain.UseCases;
 using Complevo.Infrastructure;
 using Complevo.Infrastructure.Context;
 using Complevo.Infrastructure.Repositories;
+using Complevo.Interface.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER") == "true" ? "Docker" : "Default";
@@ -45,6 +46,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.Run();
 

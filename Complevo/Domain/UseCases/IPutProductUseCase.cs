@@ -4,5 +4,5 @@ namespace Complevo.Domain.UseCases;
 
 public interface IPutProductUseCase
 {
-  Task Handle(int id, Product product);
+  Task<bool> Handle(int id, Product product);
 }

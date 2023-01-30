@@ -53,18 +53,9 @@ public class ProductController : ControllerBase
   {
     if (id != product.Id) return BadRequest();
 
-    try
-    {
-      await _putProductUseCase.Handle(id, product);
-    }
-    catch (Exception e)
-    {
-      if (e.Message.Equals("Product not found")) return NotFound();
-
-      throw;
-    }
-
-    return NoContent();
+    if (await _putProductUseCase.Handle(id, product))
+      return NoContent();
+    return NotFound();
   }
 
   // POST: api/Product
@@ -73,15 +64,8 @@ public class ProductController : ControllerBase
   public async Task<ActionResult<Product>> PostProduct([FromBody] PostProductDto productDto)
   {
     var product = productDto.CastToDomainClass();
-    try
-    {
-      await _postProductUseCase.Handle(product);
-    }
-    catch (Exception e)
-      when (e.Message.Contains("An item with the same key has already been added"))
-    {
-      return Conflict();
-    }
+
+    await _postProductUseCase.Handle(product);
 
     return CreatedAtAction("GetProduct", new { id = product.Id }, product);
   }
@@ -90,17 +74,8 @@ public class ProductController : ControllerBase
   [HttpDelete("{id}")]
   public async Task<IActionResult> DeleteProduct(int id)
   {
-    try
-    {
-      await _deleteProductUseCase.Handle(id);
-    }
-    catch (Exception e)
-    {
-      if (e.Message.Equals("Product not found"))
-        return NotFound();
-      throw;
-    }
-
-    return NoContent();
+    if (await _deleteProductUseCase.Handle(id))
+      return NoContent();
+    return NotFound();
   }
 }
