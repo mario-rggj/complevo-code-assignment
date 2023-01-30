@@ -43,7 +43,7 @@ public class ProductController : ControllerBase
   {
     var product = await _getProductUseCase.Handle(id);
 
-    return product == null ? NotFound() : product;
+    return product.Value is null ? NotFound() : product;
   }
 
   // PUT: api/Product/5

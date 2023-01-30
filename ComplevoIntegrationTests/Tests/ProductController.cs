@@ -111,12 +111,14 @@ public class ProductController
     // Act
     var response1 = await sut.Client.GetAsync("api/Product/1");
     var response2 = await sut.Client.GetAsync("api/Product/2");
+    var response3 = await sut.Client.GetAsync("api/Product/21");
 
     // Assert
     response1.EnsureSuccessStatusCode();
-    response2.EnsureSuccessStatusCode();
     Assert.Equivalent(expectedProducts[0], JsonConvert.DeserializeObject<Product>(await response1.Content.ReadAsStringAsync()));
+    response2.EnsureSuccessStatusCode();
     Assert.Equivalent(expectedProducts[1], JsonConvert.DeserializeObject<Product>(await response2.Content.ReadAsStringAsync()));
+    Assert.Equal(HttpStatusCode.NotFound, response3.StatusCode);
   }
 
   [Fact]
