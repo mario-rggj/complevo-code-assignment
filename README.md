@@ -68,7 +68,7 @@ Components:
 - Unit Of Work
   - It is responsible for making data manipulation through repositories available to the Use Cases, and commiting changes to the database. 
 - Context
-  - Its responsabilities includes creating connections to the database, configuring it and mapping domain classes relationships cardinality.  
+  - Its responsibilities includes creating connections to the database, configuring it and mapping domain classes relationships cardinality.  
 - Migrations
   - The migrations enables the database schema to be versioned and to update the schema automatically based on that version
 
@@ -77,14 +77,24 @@ Since this initial state of the code assignment doesn't have too much business s
 The database provider used on the tests is the same used in development, but different schema, for more accurate test results.
 
 ### Why not Minimal API? Why not Dapper?
-Short answer, personal preference. I've been developing in Node (TypeScript, Express, no ORM) for quite some time now and really missed writing code in a strong typed language with a more enterprise feel.
+Short answer, personal preference. I've been developing in Node (TypeScript, Express, no ORM) for quite some time now and really missed writing code in a strong typed language with enterprise grade frameworks.
 But on a real world application it wouldn't be a simple personal preference for me, it would depend on a lot of different variables, and of course the personal preference, but from the company and team.
 
 ---
 
-### TODO
+## TODO
+### Acceptance Criteria
+- [x] Be able to create, update and delete products;
+- [ ] A product cannot be duplicated;
+- [x] The data should be persisted for a future search;
+- [x] API should be documented;
+
+### Extra TODO
+
 - [ ] Add Name and Description search filter to the get all endpoint
 - [ ] Add sorting to the get all endpoint
+- [ ] Add Patch method for Product
+- [ ] Automated deploy with GitHub Actions + AWS or Serverless Framework + localstack
 - [x] Add exception handler middleware 
 - [x] Finish README 
 - [x] Add query strings example to API
@@ -93,12 +103,8 @@ But on a real world application it wouldn't be a simple personal preference for 
 - [x] Implement Repository Pattern
 - [x] Use Separation of Concerns
 - [x] Apply Dependency Inversion Principle
-
-#### Bonus TODO
-- [ ] Add Patch method for Product
-- [ ] Create custom exception for entity not found
-- [ ] Automated deploy with GitHub Actions + AWS or Serverless Framework + localstack
-- [ ] hide secrets
-- [ ] pre commit hook to look for secrets (Talisman)
 - [x] pre commit hook to lint staged files
 - [x] pre commit hook to run tests
+- ~~hide secrets with Secret Manager tool~~
+- ~~pre commit hook to look for secrets with Talisman~~
+  - it would make it more difficult for other people to run the application
