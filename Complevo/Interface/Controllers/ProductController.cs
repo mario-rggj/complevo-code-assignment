@@ -31,9 +31,9 @@ public class ProductController : ControllerBase
   // GET: api/Product
 
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+  public async Task<ActionResult<IEnumerable<Product>>> GetProducts(int page = 1, int pageSize = 5)
   {
-    return await _getProductsUseCase.Handle();
+    return await _getProductsUseCase.Handle(page, pageSize);
   }
 
   // GET: api/Product/5

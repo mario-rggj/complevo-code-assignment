@@ -16,9 +16,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     Context = context;
   }
 
-  public async Task<ActionResult<IEnumerable<TEntity>>> GetAll()
+  public async Task<ActionResult<IEnumerable<TEntity>>> GetAll(int pageIndex, int pageSize)
   {
-    return await Context.Set<TEntity>().ToListAsync();
+    return await Context.Set<TEntity>().Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
   }
 
   public async Task<ActionResult<TEntity>> Get(int id)

@@ -16,7 +16,9 @@ Swagger available at [http://localhost:8080/swagger/index.html](http://localhost
 
 ### TODO
 - [ ] Finish README 
-- [ ] Add query strings example to API
+- [ ] Add Name and Description search filter to the get all endpoint
+- [ ] Add sorting to the get all endpoint
+- [x] Add query strings example to API
 - [x] Integration tests for endpoints
 - [x] Use Docker
 - [x] Implement Repository Pattern

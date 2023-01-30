@@ -14,8 +14,8 @@ public class GetProductsUseCase : IGetProductsUseCase
     _unitOfWork = unitOfWork;
   }
 
-  public async Task<ActionResult<IEnumerable<Product>>> Handle()
+  public async Task<ActionResult<IEnumerable<Product>>> Handle(int pageIndex, int pageSize)
   {
-    return await _unitOfWork.Products.GetAll();
+    return await _unitOfWork.Products.GetAll(pageIndex, pageSize);
   }
 }

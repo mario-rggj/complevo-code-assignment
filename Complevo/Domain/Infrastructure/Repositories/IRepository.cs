@@ -6,7 +6,7 @@ namespace Complevo.Domain.Infrastructure.Repositories;
 
 public interface IRepository<TEntity> where TEntity : class
 {
-  Task<ActionResult<IEnumerable<TEntity>>> GetAll();
+  Task<ActionResult<IEnumerable<TEntity>>> GetAll(int pageIndex, int pageSize);
   Task<ActionResult<TEntity>> Get(int id);
   Task<ActionResult<IEnumerable<TEntity>>> Find(Expression<Func<TEntity, bool>> predicate);
 
