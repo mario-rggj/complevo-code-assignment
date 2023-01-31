@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Complevo.Application.UseCases;
 using Complevo.Domain.Infrastructure;
 using Complevo.Domain.Infrastructure.Repositories;
@@ -7,6 +6,7 @@ using Complevo.Infrastructure;
 using Complevo.Infrastructure.Context;
 using Complevo.Infrastructure.Repositories;
 using Complevo.Interface.Middlewares;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("IS_RUNNING_ON_DOCKER") == "true" ? "Docker" : "Default";
@@ -51,4 +51,6 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.Run();
 
-public partial class Program { }
+public partial class Program
+{
+}

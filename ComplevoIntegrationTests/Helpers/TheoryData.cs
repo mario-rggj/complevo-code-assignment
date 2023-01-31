@@ -1,6 +1,6 @@
 namespace ComplevoIntegrationTests.Helpers;
 
-public partial class BasicTests
+public class BasicTests
 {
   public class TheoryData<T1, T2> : TheoryData
   {

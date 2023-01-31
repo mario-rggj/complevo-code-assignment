@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Complevo.Domain.Infrastructure.Repositories;
+﻿using Complevo.Domain.Infrastructure.Repositories;
 using Complevo.Domain.Models;
 using Complevo.Infrastructure.Context;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Complevo.Infrastructure.Repositories;
 

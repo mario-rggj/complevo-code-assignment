@@ -4,7 +4,6 @@ using Complevo.Domain.Models;
 using Complevo.Interface.Dtos.ProductDtos;
 using ComplevoIntegrationTests.Helpers;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace ComplevoIntegrationTests.Tests;
@@ -17,36 +16,6 @@ public class ProductController
   public ProductController(CustomWebApplicationFactory<Program> factory) : base(factory)
   {
     _factory = factory;
-  }
-
-  private class GetProductsTestData : TheoryData<List<Product>>
-  {
-    public GetProductsTestData()
-    {
-      Add(new List<Product>
-      {
-        new Product {Name = "Name1", Description = "Description1", Price = 1m},
-        new Product {Name = "Name2", Description = "Description2", Price = 2m},
-        new Product {Name = "Name3", Description = "Description3", Price = 2m},
-        new Product {Name = "Name4", Description = "Description4", Price = 2m},
-        new Product {Name = "Name5", Description = "Description5", Price = 2m},
-        new Product {Name = "Name6", Description = "Description6", Price = 2m},
-        new Product {Name = "Name7", Description = "Description7", Price = 2m},
-        new Product {Name = "Name8", Description = "Description8", Price = 2m},
-        new Product {Name = "Name9", Description = "Description9", Price = 2m},
-        new Product {Name = "Name10", Description = "Description10", Price = 2m},
-        new Product {Name = "Name11", Description = "Description11", Price = 2m},
-        new Product {Name = "Name12", Description = "Description12", Price = 2m},
-        new Product {Name = "Name13", Description = "Description13", Price = 2m},
-        new Product {Name = "Name14", Description = "Description14", Price = 2m},
-        new Product {Name = "Name15", Description = "Description15", Price = 2m},
-        new Product {Name = "Name16", Description = "Description16", Price = 2m},
-        new Product {Name = "Name17", Description = "Description17", Price = 2m},
-        new Product {Name = "Name18", Description = "Description18", Price = 2m},
-        new Product {Name = "Name19", Description = "Description19", Price = 2m},
-        new Product {Name = "Name20", Description = "Description20", Price = 2m}
-      });
-    }
   }
 
   [Theory]
@@ -63,7 +32,8 @@ public class ProductController
 
     // Assert
     response.EnsureSuccessStatusCode();
-    Assert.Equivalent(GetProductDto.fromProducts(expectedProducts), JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync()));
+    Assert.Equivalent(GetProductDto.fromProducts(expectedProducts),
+      JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync()));
   }
 
   [Theory]
@@ -102,7 +72,8 @@ public class ProductController
     var response = await sut.Client.GetAsync("api/Product");
 
     response.EnsureSuccessStatusCode();
-    Assert.Equivalent(new List<Product>(), JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync()));
+    Assert.Equivalent(new List<Product>(),
+      JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync()));
   }
 
   [Theory]
@@ -121,9 +92,11 @@ public class ProductController
 
     // Assert
     response1.EnsureSuccessStatusCode();
-    Assert.Equivalent(new GetProductDto(expectedProducts[0]), JsonConvert.DeserializeObject<Product>(await response1.Content.ReadAsStringAsync()));
+    Assert.Equivalent(new GetProductDto(expectedProducts[0]),
+      JsonConvert.DeserializeObject<Product>(await response1.Content.ReadAsStringAsync()));
     response2.EnsureSuccessStatusCode();
-    Assert.Equivalent(new GetProductDto(expectedProducts[1]), JsonConvert.DeserializeObject<Product>(await response2.Content.ReadAsStringAsync()));
+    Assert.Equivalent(new GetProductDto(expectedProducts[1]),
+      JsonConvert.DeserializeObject<Product>(await response2.Content.ReadAsStringAsync()));
     Assert.Equal(HttpStatusCode.NotFound, response3.StatusCode);
   }
 
@@ -142,7 +115,7 @@ public class ProductController
     var response = await sut.Client.PostAsync("api/Product", contentString);
 
     product.Id = 1;
-    var actual = sut.Context.Products.Single((p => p.Id == 1));
+    var actual = sut.Context.Products.Single(p => p.Id == 1);
     product.CreatedAt = actual.CreatedAt;
     product.UpdatedAt = actual.UpdatedAt;
     response.EnsureSuccessStatusCode();
@@ -211,7 +184,7 @@ public class ProductController
     var response = await sut.Client.PutAsync("api/Product/1", contentString);
 
     response.EnsureSuccessStatusCode();
-    Assert.Equivalent(sut.Context.Products.Single((p => p.Id == 1)), product);
+    Assert.Equivalent(sut.Context.Products.Single(p => p.Id == 1), product);
   }
 
   [Fact]
@@ -269,7 +242,7 @@ public class ProductController
     var response = await sut.Client.DeleteAsync("api/Product/1");
 
     response.EnsureSuccessStatusCode();
-    Assert.Equivalent(sut.Context.Products.Any((p => p.Id == 1)), false);
+    Assert.Equivalent(sut.Context.Products.Any(p => p.Id == 1), false);
   }
 
   [Fact]
@@ -280,5 +253,35 @@ public class ProductController
     var response = await sut.Client.DeleteAsync("api/Product/1");
 
     Assert.Equal((HttpStatusCode)404, response.StatusCode);
+  }
+
+  private class GetProductsTestData : TheoryData<List<Product>>
+  {
+    public GetProductsTestData()
+    {
+      Add(new List<Product>
+      {
+        new() { Name = "Name1", Description = "Description1", Price = 1m },
+        new() { Name = "Name2", Description = "Description2", Price = 2m },
+        new() { Name = "Name3", Description = "Description3", Price = 2m },
+        new() { Name = "Name4", Description = "Description4", Price = 2m },
+        new() { Name = "Name5", Description = "Description5", Price = 2m },
+        new() { Name = "Name6", Description = "Description6", Price = 2m },
+        new() { Name = "Name7", Description = "Description7", Price = 2m },
+        new() { Name = "Name8", Description = "Description8", Price = 2m },
+        new() { Name = "Name9", Description = "Description9", Price = 2m },
+        new() { Name = "Name10", Description = "Description10", Price = 2m },
+        new() { Name = "Name11", Description = "Description11", Price = 2m },
+        new() { Name = "Name12", Description = "Description12", Price = 2m },
+        new() { Name = "Name13", Description = "Description13", Price = 2m },
+        new() { Name = "Name14", Description = "Description14", Price = 2m },
+        new() { Name = "Name15", Description = "Description15", Price = 2m },
+        new() { Name = "Name16", Description = "Description16", Price = 2m },
+        new() { Name = "Name17", Description = "Description17", Price = 2m },
+        new() { Name = "Name18", Description = "Description18", Price = 2m },
+        new() { Name = "Name19", Description = "Description19", Price = 2m },
+        new() { Name = "Name20", Description = "Description20", Price = 2m }
+      });
+    }
   }
 }

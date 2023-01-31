@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
 using Complevo.Domain.Models;
 using Complevo.Domain.UseCases;
 using Complevo.Interface.Dtos.ProductDtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Complevo.Interface.Controllers;
 
@@ -16,11 +16,11 @@ public class ProductController : ControllerBase
   private readonly IPutProductUseCase _putProductUseCase;
 
   public ProductController(
-      IGetProductsUseCase getProductsUseCase,
-      IGetProductUseCase getProductUseCase,
-      IPutProductUseCase putProductUseCase,
-      IPostProductUseCase postProductUseCase,
-      IDeleteProductUseCase deleteProductUseCase)
+    IGetProductsUseCase getProductsUseCase,
+    IGetProductUseCase getProductUseCase,
+    IPutProductUseCase putProductUseCase,
+    IPostProductUseCase postProductUseCase,
+    IDeleteProductUseCase deleteProductUseCase)
   {
     _getProductsUseCase = getProductsUseCase;
     _getProductUseCase = getProductUseCase;

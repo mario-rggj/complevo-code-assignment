@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Complevo.Domain.Models;
+﻿using Complevo.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Complevo.Infrastructure.Context;
 
@@ -23,7 +23,7 @@ public class ApiContext : DbContext
     return base.SaveChanges();
   }
 
-  public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+  public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
   {
     AddTimestamps();
     return await base.SaveChangesAsync(cancellationToken);

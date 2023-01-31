@@ -1,9 +1,6 @@
 ﻿using Complevo.Domain.Infrastructure;
 using Complevo.Domain.Models;
 using Complevo.Domain.UseCases;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Complevo.Application.UseCases;
 
@@ -20,10 +17,7 @@ public class PostProductUseCase : IPostProductUseCase
   {
     var persistedProduct = (await _unitOfWork.Products
       .Find(p => p.Name == product.Name)).Value?.ToList().Count;
-    if (persistedProduct >= 1)
-    {
-      return false;
-    }
+    if (persistedProduct >= 1) return false;
     _unitOfWork.Products.Add(product);
     await _unitOfWork.Complete();
     return true;

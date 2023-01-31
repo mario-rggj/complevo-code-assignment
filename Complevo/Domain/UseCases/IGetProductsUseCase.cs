@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Complevo.Domain.Models;
+﻿using Complevo.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Complevo.Domain.UseCases;
 

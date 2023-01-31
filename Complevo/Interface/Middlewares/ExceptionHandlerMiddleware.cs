@@ -33,7 +33,7 @@ public class ExceptionHandlerMiddleware
 
     var content = JsonConvert.SerializeObject(new { error = message });
     context.Response.ContentType = contentType;
-    context.Response.StatusCode = (int)code;
+    context.Response.StatusCode = code;
     return context.Response.WriteAsync(content);
   }
 }

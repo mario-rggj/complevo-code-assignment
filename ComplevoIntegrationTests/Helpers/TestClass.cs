@@ -12,8 +12,8 @@ public struct Sut
 public class TestClass
   : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
-  private readonly CustomWebApplicationFactory<Program> _factory;
   private readonly ApiContext _context;
+  private readonly CustomWebApplicationFactory<Program> _factory;
 
   protected TestClass(CustomWebApplicationFactory<Program> factory)
   {

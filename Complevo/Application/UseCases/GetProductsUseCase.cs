@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Complevo.Domain.Infrastructure;
+﻿using Complevo.Domain.Infrastructure;
 using Complevo.Domain.Models;
 using Complevo.Domain.UseCases;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Complevo.Application.UseCases;
 

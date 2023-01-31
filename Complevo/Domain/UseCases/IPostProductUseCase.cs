@@ -1,5 +1,4 @@
 ﻿using Complevo.Domain.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Complevo.Domain.UseCases;
 
