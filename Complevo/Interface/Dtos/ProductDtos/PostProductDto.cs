@@ -8,7 +8,7 @@ public class PostProductDto
   public string Description { get; set; }
   public decimal Price { get; set; }
 
-  public Product CastToDomainClass()
+  public Product ToProduct()
   {
     return new Product
     {

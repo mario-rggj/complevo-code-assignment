@@ -92,10 +92,10 @@ But on a real world application it wouldn't be a simple personal preference for 
 ### Extra TODO
 - [ ] Add Name and Description search filter to the get all endpoint
 - [ ] Add sorting to the get all endpoint
-- [ ] Create CreatedAt and UpdatedAt properties with DTO to hide them
 - [ ] Use soft delete/paranoid tables
 - [ ] Add Patch method for Product
 - [ ] Automated deploy with GitHub Actions + AWS or Serverless Framework + localstack
+- [x] Create CreatedAt and UpdatedAt properties with DTO to hide them
 - [x] Add exception handler middleware 
 - [x] Finish README 
 - [x] Add query strings example to API

@@ -32,18 +32,19 @@ public class ProductController : ControllerBase
   // GET: api/Product
 
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<Product>>> GetProducts(int page = 1, int pageSize = 5)
+  public async Task<ActionResult<IEnumerable<GetProductDto>>> GetProducts(int page = 1, int pageSize = 5)
   {
-    return await _getProductsUseCase.Handle(page, pageSize);
+    var products = await _getProductsUseCase.Handle(page, pageSize);
+    return GetProductDto.fromProducts(products.Value);
   }
 
   // GET: api/Product/5
   [HttpGet("{id}")]
-  public async Task<ActionResult<Product>> GetProduct(int id)
+  public async Task<ActionResult<GetProductDto>> GetProduct(int id)
   {
     var product = await _getProductUseCase.Handle(id);
 
-    return product.Value is null ? NotFound() : product;
+    return product.Value is null ? NotFound() : new GetProductDto(product.Value);
   }
 
   // PUT: api/Product/5
@@ -61,13 +62,13 @@ public class ProductController : ControllerBase
   // POST: api/Product
   // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
   [HttpPost]
-  public async Task<ActionResult<Product>> PostProduct([FromBody] PostProductDto productDto)
+  public async Task<ActionResult<GetProductDto>> PostProduct([FromBody] PostProductDto productDto)
   {
-    var product = productDto.CastToDomainClass();
+    var product = productDto.ToProduct();
 
     if (await _postProductUseCase.Handle(product))
-      return CreatedAtAction("GetProduct", new { id = product.Id }, product);
-    return Conflict();
+      return CreatedAtAction("GetProduct", new { id = product.Id }, new GetProductDto(product));
+    return Conflict($"Product with name: \"{product.Name}\" already exists");
   }
 
   // DELETE: api/Product/5

@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 using Complevo.Domain.Models;
+using Complevo.Interface.Dtos.ProductDtos;
 using ComplevoIntegrationTests.Helpers;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -62,7 +63,7 @@ public class ProductController
 
     // Assert
     response.EnsureSuccessStatusCode();
-    Assert.Equivalent(expectedProducts, JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync()));
+    Assert.Equivalent(GetProductDto.fromProducts(expectedProducts), JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync()));
   }
 
   [Theory]
@@ -79,13 +80,18 @@ public class ProductController
     var page2Size10Response = await sut.Client.GetAsync("api/Product?page=2&pageSize=10");
 
     page1DefaultSizeResponse.EnsureSuccessStatusCode();
-    expectedProducts.GetRange(0, 5).Should().BeEquivalentTo(JsonConvert.DeserializeObject<List<Product>>(await page1DefaultSizeResponse.Content.ReadAsStringAsync()));
+    var test = GetProductDto.fromProducts(expectedProducts.GetRange(0, 5));
+    JsonConvert.DeserializeObject<List<Product>>(await page1DefaultSizeResponse.Content.ReadAsStringAsync()).Should()
+      .BeEquivalentTo(GetProductDto.fromProducts(expectedProducts.GetRange(0, 5)));
     page2DefaultSizeResponse.EnsureSuccessStatusCode();
-    expectedProducts.GetRange(5, 5).Should().BeEquivalentTo(JsonConvert.DeserializeObject<List<Product>>(await page2DefaultSizeResponse.Content.ReadAsStringAsync()));
+    JsonConvert.DeserializeObject<List<Product>>(await page2DefaultSizeResponse.Content.ReadAsStringAsync()).Should()
+      .BeEquivalentTo(GetProductDto.fromProducts(expectedProducts.GetRange(5, 5)));
     page1Size10Response.EnsureSuccessStatusCode();
-    expectedProducts.GetRange(0, 10).Should().BeEquivalentTo(JsonConvert.DeserializeObject<List<Product>>(await page1Size10Response.Content.ReadAsStringAsync()));
+    JsonConvert.DeserializeObject<List<Product>>(await page1Size10Response.Content.ReadAsStringAsync()).Should()
+      .BeEquivalentTo(GetProductDto.fromProducts(expectedProducts.GetRange(0, 10)));
     page2Size10Response.EnsureSuccessStatusCode();
-    expectedProducts.GetRange(10, 10).Should().BeEquivalentTo(JsonConvert.DeserializeObject<List<Product>>(await page2Size10Response.Content.ReadAsStringAsync()));
+    JsonConvert.DeserializeObject<List<Product>>(await page2Size10Response.Content.ReadAsStringAsync()).Should()
+      .BeEquivalentTo(GetProductDto.fromProducts(expectedProducts.GetRange(10, 10)));
   }
 
   [Fact]
@@ -115,9 +121,9 @@ public class ProductController
 
     // Assert
     response1.EnsureSuccessStatusCode();
-    Assert.Equivalent(expectedProducts[0], JsonConvert.DeserializeObject<Product>(await response1.Content.ReadAsStringAsync()));
+    Assert.Equivalent(new GetProductDto(expectedProducts[0]), JsonConvert.DeserializeObject<Product>(await response1.Content.ReadAsStringAsync()));
     response2.EnsureSuccessStatusCode();
-    Assert.Equivalent(expectedProducts[1], JsonConvert.DeserializeObject<Product>(await response2.Content.ReadAsStringAsync()));
+    Assert.Equivalent(new GetProductDto(expectedProducts[1]), JsonConvert.DeserializeObject<Product>(await response2.Content.ReadAsStringAsync()));
     Assert.Equal(HttpStatusCode.NotFound, response3.StatusCode);
   }
 
@@ -136,8 +142,12 @@ public class ProductController
     var response = await sut.Client.PostAsync("api/Product", contentString);
 
     product.Id = 1;
+    var actual = sut.Context.Products.Single((p => p.Id == 1));
+    product.CreatedAt = actual.CreatedAt;
+    product.UpdatedAt = actual.UpdatedAt;
     response.EnsureSuccessStatusCode();
-    Assert.Equivalent(sut.Context.Products.Single((p => p.Id == 1)), product);
+
+    actual.Should().BeEquivalentTo(product);
   }
 
   [Fact]
