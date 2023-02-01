@@ -5,5 +5,5 @@ namespace Complevo.Domain.Infrastructure.Repositories;
 
 public interface IProductRepository : IRepository<Product>
 {
-  Task<ActionResult<IEnumerable<Product>>> GetAllProductsUnderPrice10();
+  Task<IEnumerable<Product>> GetAllProductsUnderPrice10();
 }

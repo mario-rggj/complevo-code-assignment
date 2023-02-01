@@ -16,7 +16,7 @@ public class PostProductUseCase : IPostProductUseCase
   public async Task<bool> Handle(Product product)
   {
     var persistedProduct = (await _unitOfWork.Products
-      .Find(p => p.Name == product.Name)).Value?.ToList().Count;
+      .Find(p => p.Name == product.Name)).ToList().Count;
     if (persistedProduct >= 1) return false;
     _unitOfWork.Products.Add(product);
     await _unitOfWork.Complete();

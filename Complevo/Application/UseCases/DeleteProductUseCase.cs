@@ -15,9 +15,9 @@ public class DeleteProductUseCase : IDeleteProductUseCase
   public async Task<bool> Handle(int id)
   {
     var product = await _unitOfWork.Products.Get(id);
-    if (product.Value == null) return false;
+    if (product == null) return false;
 
-    _unitOfWork.Products.Remove(product.Value);
+    _unitOfWork.Products.Remove(product);
     await _unitOfWork.Complete();
     return true;
   }

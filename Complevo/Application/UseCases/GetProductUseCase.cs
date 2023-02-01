@@ -14,7 +14,7 @@ public class GetProductUseCase : IGetProductUseCase
     _unitOfWork = unitOfWork;
   }
 
-  public async Task<ActionResult<Product>> Handle(int id)
+  public async Task<Product> Handle(int id)
   {
     return await _unitOfWork.Products.Get(id);
   }

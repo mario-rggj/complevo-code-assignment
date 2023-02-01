@@ -12,7 +12,7 @@ public class ProductRepository : Repository<Product>, IProductRepository
   {
   }
 
-  public async Task<ActionResult<IEnumerable<Product>>> GetAllProductsUnderPrice10()
+  public async Task<IEnumerable<Product>> GetAllProductsUnderPrice10()
   {
     return await Context.Products.Where(p => p.Price < 10m).ToListAsync();
   }

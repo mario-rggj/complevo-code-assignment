@@ -16,22 +16,22 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     Context = context;
   }
 
-  public async Task<ActionResult<IEnumerable<TEntity>>> GetAll(int pageIndex, int pageSize)
+  public async Task<IEnumerable<TEntity>> GetAll(int pageIndex, int pageSize)
   {
     return await Context.Set<TEntity>().Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
   }
 
-  public async Task<ActionResult<TEntity>> Get(int id)
+  public async Task<TEntity> Get(int id)
   {
     return (await Context.Set<TEntity>().FindAsync(id))!;
   }
 
   public async Task<bool> Exist(int id)
   {
-    return (await Get(id)).Value is not null;
+    return (await Get(id)) is not null;
   }
 
-  public async Task<ActionResult<IEnumerable<TEntity>>> Find(Expression<Func<TEntity, bool>> predicate)
+  public async Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
   {
     return await Context.Set<TEntity>().Where(predicate).ToListAsync();
   }

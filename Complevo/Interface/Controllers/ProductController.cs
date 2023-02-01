@@ -35,7 +35,7 @@ public class ProductController : ControllerBase
   public async Task<ActionResult<IEnumerable<GetProductDto>>> GetProducts(int page = 1, int pageSize = 5)
   {
     var products = await _getProductsUseCase.Handle(page, pageSize);
-    return GetProductDto.fromProducts(products.Value);
+    return GetProductDto.fromProducts(products);
   }
 
   // GET: api/Product/5
@@ -44,7 +44,7 @@ public class ProductController : ControllerBase
   {
     var product = await _getProductUseCase.Handle(id);
 
-    return product.Value is null ? NotFound() : new GetProductDto(product.Value);
+    return product == null ? NotFound() : new GetProductDto(product);
   }
 
   // PUT: api/Product/5

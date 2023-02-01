@@ -5,5 +5,5 @@ namespace Complevo.Domain.UseCases;
 
 public interface IGetProductUseCase
 {
-  Task<ActionResult<Product>> Handle(int id);
+  Task<Product> Handle(int id);
 }
